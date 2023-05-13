@@ -14,8 +14,25 @@ import 'package:isolate_image_compress/src/constants/enums.dart';
 /// - [maxResolution] limit image resolution you want to compress ([ImageResolution]). Default is [ImageResolution.uhd].
 Future<Uint8List> compressJpegImage(Uint8List data,
     {int? maxSize, ImageResolution? maxResolution, int? width}) async {
+  // If maxSize is not specified, compression quality is set to 70
+  // This is the fastest compression because it is one single round of compression.
   if (maxSize == null) {
-    return data;
+    const _defaultQuality = 70;
+    Image? _image = decodeImage(data);
+    List<int>? _data;
+    if (maxResolution != null) {
+      _image = _image!.resizeWithResolution(maxResolution);
+      print(
+          'resizeWithResolution: ${maxResolution.width} - ${maxResolution.height}');
+    }
+    if (width != null) {
+      _image = _image!.resizeByWidth(width);;
+      print(
+          'resizeByWidth: ${width}');
+    }
+    _data = encodeJpg(_image!, quality: _defaultQuality);
+    print('encodeJpg - _defaultQuality: ${_data.length}');
+    return Uint8List.fromList(_data);
   }
 
   // quality: The JPEG quality, in the range [0, 100] where 100 is highest quality.
