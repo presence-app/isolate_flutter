@@ -50,8 +50,8 @@ Future<Uint8List> _compressImage(CompressParams params) async {
   // read image data
   final Uint8List _fileData =
       params.imageData ?? params.image?.data ?? Uint8List(0);
-
-  if (_fileData.isEmpty || _maxSize == null || _fileData.length < _maxSize) {
+  final fileSize = (_maxSize == null) ? _fileData.length : _maxSize;
+  if (_fileData.isEmpty || _fileData.length <= fileSize) {
     // not compression
     return _fileData;
   } else {
