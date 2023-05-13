@@ -108,7 +108,7 @@ extension CompressOnIsolateImage on IsolateImage {
         image: this,
         maxSize: maxSize,
         maxResolution: maxResolution,
-        maxWidth: with,
+        width: width,
         format: format);
     return IsolateFlutter.createAndStart(_compressImage, _params,
         debugLabel: 'isolate_image_compress');
@@ -126,7 +126,7 @@ extension CompressOnUint8List on Uint8List {
     final CompressParams _params = CompressParams(
         imageData: this,
         maxSize: maxSize,
-        maxWidth: maxWidth,
+        width: width,
         maxResolution: resolution,
         format: format);
     return IsolateFlutter.createAndStart(_compressImage, _params,
