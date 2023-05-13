@@ -17,6 +17,9 @@ class CompressParams {
   /// [maxSize] - compressed file size limit (Bytes).
   final int? maxSize;
 
+  /// [width] - compressed file with limit (int).
+  final int? width;
+
   /// [maxResolution] - the maximum resolution compressed.
   final ImageResolution? maxResolution;
 
@@ -33,6 +36,7 @@ class CompressParams {
       {this.image,
       this.imageData,
       this.maxSize,
+      this.width,
       this.maxResolution = ImageResolution.uhd,
       this.format})
       : assert(image != null || imageData != null);
@@ -56,16 +60,16 @@ Future<Uint8List> _compressImage(CompressParams params) async {
             findDecoderForData(_fileData);
     if (_decoder is JpegDecoder) {
       return compressJpegImage(_fileData,
-          maxSize: _maxSize, maxWidth: _maxWidth, maxResolution: _maxResolution);
+          maxSize: _maxSize, width: _with, maxResolution: _maxResolution);
     } else if (_decoder is PngDecoder) {
       return compressPngImage(_fileData,
-          maxSize: _maxSize, maxWidth: _maxWidth, maxResolution: _maxResolution);
+          maxSize: _maxSize, width: _with, maxResolution: _maxResolution);
     } else if (_decoder is TgaDecoder) {
       return compressTgaImage(_fileData,
-          maxSize: _maxSize, maxWidth: _maxWidth, maxResolution: _maxResolution);
+          maxSize: _maxSize, width: _with, maxResolution: _maxResolution);
     } else if (_decoder is GifDecoder) {
       return compressGifImage(_fileData,
-          maxSize: _maxSize, maxWidth: _maxWidth, maxResolution: _maxResolution);
+          maxSize: _maxSize, width: _with, maxResolution: _maxResolution);
     }
 
     return Uint8List(0);

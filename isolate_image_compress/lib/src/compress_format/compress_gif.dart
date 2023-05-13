@@ -34,7 +34,7 @@ Future<Uint8List> compressGifImage(Uint8List data,
       if (_width != null) {
         _image = _image!.resizeByWidth(_width);;
         print(
-            'resizeWithMaxWidth: ${_width}');
+            'resizeByWidth: ${_width}');
       }
 
       _data = encodeGif(_image!);

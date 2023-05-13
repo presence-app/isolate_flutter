@@ -31,6 +31,11 @@ Future<Uint8List> compressTgaImage(Uint8List data,
         print(
             'resizeWithResolution: ${_resolution.width} - ${_resolution.height}');
       }
+      if (_width != null) {
+        _image = _image!.resizeByWidth(_width);;
+        print(
+            'resizeByWidth: ${_width}');
+      }
       _data = encodeTga(_image!);
       print('encodeTga - length: ${_data.length}');
       if (_data.length < maxSize) {
