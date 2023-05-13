@@ -31,6 +31,7 @@ class CompressParams {
   /// - [image] - the image data used for compression (required).
   /// - [maxSize] - compressed file size limit (Bytes) (optional).
   /// - [maxResolution] - the maximum resolution compressed. Default is [ImageResolution.uhd] - 4K, Ultra HD | 3840 x 2160.
+  /// - [width] - image is resized to width if original width > width
   /// - [format] - the image format you want to compress (optional).
   CompressParams(
       {this.image,
@@ -44,6 +45,7 @@ class CompressParams {
 
 Future<Uint8List> _compressImage(CompressParams params) async {
   final _maxSize = params.maxSize;
+  final _width = params.width;
 
   // read image data
   final Uint8List _fileData =
@@ -60,16 +62,16 @@ Future<Uint8List> _compressImage(CompressParams params) async {
             findDecoderForData(_fileData);
     if (_decoder is JpegDecoder) {
       return compressJpegImage(_fileData,
-          maxSize: _maxSize, width: width, maxResolution: _maxResolution);
+          maxSize: _maxSize, width: _width, maxResolution: _maxResolution);
     } else if (_decoder is PngDecoder) {
       return compressPngImage(_fileData,
-          maxSize: _maxSize, width: width, maxResolution: _maxResolution);
+          maxSize: _maxSize, width: _width, maxResolution: _maxResolution);
     } else if (_decoder is TgaDecoder) {
       return compressTgaImage(_fileData,
-          maxSize: _maxSize, width: width, maxResolution: _maxResolution);
+          maxSize: _maxSize, width: _width, maxResolution: _maxResolution);
     } else if (_decoder is GifDecoder) {
       return compressGifImage(_fileData,
-          maxSize: _maxSize, width: width, maxResolution: _maxResolution);
+          maxSize: _maxSize, width: _width, maxResolution: _maxResolution);
     }
 
     return Uint8List(0);
@@ -121,9 +123,10 @@ extension CompressOnUint8List on Uint8List {
   ///
   /// - [maxSize] - compressed file size limit (Bytes). (optional).
   /// - [maxResolution] - the maximum resolution compressed. (optional).
+  /// - [width] - image is resized to width if original width > width
   /// - [format] - the image format you want to compress. (optional).
   Future<Uint8List?> compress(
-      {int? maxSize, ImageResolution? resolution, int? maxWidth, ImageFormat? format}) async {
+      {int? maxSize, ImageResolution? resolution, int? width, ImageFormat? format}) async {
     final CompressParams _params = CompressParams(
         imageData: this,
         maxSize: maxSize,
@@ -142,7 +145,7 @@ extension CompressOnListInt on List<int> {
   /// - [maxResolution] - the maximum resolution compressed. (optional).
   /// - [format] - the image format you want to compress. (optional).
   Future<Uint8List?> compress(
-      {int? maxSize, ImageResolution? resolution, int? maxWidth, ImageFormat? format}) async {
+      {int? maxSize, ImageResolution? resolution, int? width, ImageFormat? format}) async {
     final CompressParams _params = CompressParams(
         imageData: Uint8List.fromList(this),
         maxSize: maxSize,

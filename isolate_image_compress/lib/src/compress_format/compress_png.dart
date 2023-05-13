@@ -13,7 +13,7 @@ import 'package:isolate_image_compress/src/constants/enums.dart';
 /// - [maxSize] limit file size you want to compress (Bytes). If it is null, return [data].
 /// - [maxResolution] limit image resolution you want to compress ([ImageResolution]). Default is [ImageResolution.uhd].
 Future<Uint8List> compressPngImage(Uint8List data,
-    {int? maxSize, ImageResolution? maxResolution, int= width}) async {
+    {int? maxSize, ImageResolution? maxResolution, int? width}) async {
   if (maxSize == null) {
     return data;
   }
