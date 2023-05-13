@@ -60,16 +60,16 @@ Future<Uint8List> _compressImage(CompressParams params) async {
             findDecoderForData(_fileData);
     if (_decoder is JpegDecoder) {
       return compressJpegImage(_fileData,
-          maxSize: _maxSize, width: with, maxResolution: _maxResolution);
+          maxSize: _maxSize, width: width, maxResolution: _maxResolution);
     } else if (_decoder is PngDecoder) {
       return compressPngImage(_fileData,
-          maxSize: _maxSize, width: with, maxResolution: _maxResolution);
+          maxSize: _maxSize, width: width, maxResolution: _maxResolution);
     } else if (_decoder is TgaDecoder) {
       return compressTgaImage(_fileData,
-          maxSize: _maxSize, width: with, maxResolution: _maxResolution);
+          maxSize: _maxSize, width: width, maxResolution: _maxResolution);
     } else if (_decoder is GifDecoder) {
       return compressGifImage(_fileData,
-          maxSize: _maxSize, width: with, maxResolution: _maxResolution);
+          maxSize: _maxSize, width: width, maxResolution: _maxResolution);
     }
 
     return Uint8List(0);
