@@ -58,8 +58,6 @@ Future<Uint8List> _compressImage(CompressParams params) async {
   final Uint8List _fileData =
       params.imageData ?? params.image?.data ?? Uint8List(0);
   final fileSize = (_maxSize != null) ? _maxSize : 0;
-  debugPrint('Compress_utils: fileSize: $fileSize');
-  debugPrint('Compress_utils: _fileData.length: $_fileData.length');
   if (_fileData.isEmpty || _fileData.length <= fileSize) {
     // not compression
     return _fileData;

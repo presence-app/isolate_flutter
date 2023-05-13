@@ -17,7 +17,6 @@ Future<Uint8List> compressJpegImage(Uint8List data,
     {int? maxSize, int? quality, ImageResolution? maxResolution, int? width}) async {
   // If maxSize is not specified, compression quality is set to 70
   // This is the fastest compression because it is one single round of compression.
-  print('encodeJpg - maxSize: $maxSize');
   if (maxSize == null) {
     int _defaultQuality = (quality == null) ? 70 : quality;
     Image? _image = decodeImage(data);
