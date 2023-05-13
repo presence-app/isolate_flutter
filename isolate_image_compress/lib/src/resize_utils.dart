@@ -24,7 +24,7 @@ extension ResizeOnImage on Image {
   }
 
   /// Resize image by maxWidth resolution
-  Image resizeWithMaxWidth(int maxWidth) {
+  Image resizeByWidth(int width) {
     //Resize the image to 1200px width by mantaining aspect ratio
     return copyResize(this, width: width);
   }
@@ -32,7 +32,7 @@ extension ResizeOnImage on Image {
 
 extension ResizeOnIsolateImage on IsolateImage {
   /// Resize image with resolution
-  Image? resizeWithResolution(ImageResolution resolution) {
+  Image? resizeByResolution(ImageResolution resolution) {
     if (data?.isNotEmpty == true) {
       final _image = decodeImage(data!);
       if (_image != null) {
@@ -43,7 +43,7 @@ extension ResizeOnIsolateImage on IsolateImage {
   }
 
   /// Resize image with resolution
-  Image? resizeWithResolution(int maxWidth) {
+  Image? resizeByWidth(int width) {
     if (data?.isNotEmpty == true) {
       final _image = decodeImage(data!);
       if (_image != null) {

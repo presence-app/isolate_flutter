@@ -37,10 +37,10 @@ Future<Uint8List> compressPngImage(Uint8List data,
             'resizeWithResolution: ${_resolution.width} - ${_resolution.height}');
       }
 
-      if (_maxWidth != null) {
-        _image = _image!.resizeWithMaxWidth(_maxWidth);;
+      if (_width != null) {
+        _image = _image!.resizeByWidth(_width);;
         print(
-            'resizeWithMaxWidth: ${_maxWidth}');
+            'resizeWithMaxWidth: ${_width}');
       }
 
       _data = encodePng(_image!, level: _minLevel);
