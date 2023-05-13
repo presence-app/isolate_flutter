@@ -13,7 +13,7 @@ import 'package:isolate_image_compress/src/constants/enums.dart';
 /// - [maxSize] limit file size you want to compress (Bytes). If it is null, return [data].
 /// - [maxResolution] limit image resolution you want to compress ([ImageResolution]). Default is [ImageResolution.uhd].
 Future<Uint8List> compressGifImage(Uint8List data,
-    {int? maxSize, ImageResolution? maxResolution, int? maxWidth}) async {
+    {int? maxSize, ImageResolution? maxResolution, int? width}) async {
   if (maxSize == null) {
     return data;
   }
@@ -31,10 +31,10 @@ Future<Uint8List> compressGifImage(Uint8List data,
         print(
             'resizeWithResolution: ${_resolution.width} - ${_resolution.height}');
       }
-      if (_width != null) {
-        _image = _image!.resizeByWidth(_width);;
+      if (width != null) {
+        _image = _image!.resizeByWidth(width);;
         print(
-            'resizeByWidth: ${_width}');
+            'resizeByWidth: ${width}');
       }
 
       _data = encodeGif(_image!);
