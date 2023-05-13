@@ -39,7 +39,7 @@ Future<Uint8List> compressJpegImage(Uint8List data,
       if (_width != null) {
         _image = _image!.resizeByWidth(_width);;
         print(
-            'resizeWithMaxWidth: ${_with}');
+            'resizeByWidth: ${_with}');
       }
 
       _data = encodeJpg(_image!, quality: _maxQuality);

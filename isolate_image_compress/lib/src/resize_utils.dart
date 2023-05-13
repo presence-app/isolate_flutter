@@ -23,7 +23,7 @@ extension ResizeOnImage on Image {
     return this;
   }
 
-  /// Resize image by maxWidth resolution
+  /// Resize image by width resolution
   Image resizeByWidth(int width) {
     //Resize the image to 1200px width by mantaining aspect ratio
     return copyResize(this, width: width);
