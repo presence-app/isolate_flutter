@@ -22,6 +22,12 @@ extension ResizeOnImage on Image {
 
     return this;
   }
+
+  /// Resize image by maxWidth resolution
+  Image resizeWithMaxWidth(int maxWidth) {
+    //Resize the image to 1200px width by mantaining aspect ratio
+    return copyResize(this, width: width);
+  }
 }
 
 extension ResizeOnIsolateImage on IsolateImage {
@@ -30,9 +36,21 @@ extension ResizeOnIsolateImage on IsolateImage {
     if (data?.isNotEmpty == true) {
       final _image = decodeImage(data!);
       if (_image != null) {
-        return _image.resizeWithResolution(resolution);
+        return _image.resizeWithMaxWidth(resolution);
       }
     }
     return null;
   }
+
+  /// Resize image with resolution
+  Image? resizeWithResolution(int maxWidth) {
+    if (data?.isNotEmpty == true) {
+      final _image = decodeImage(data!);
+      if (_image != null) {
+        return _image.resizeWithResolution(maxWidth);
+      }
+    }
+    return null;
+  }
+
 }
