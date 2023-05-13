@@ -19,8 +19,10 @@ Future<Uint8List> compressPngImage(Uint8List data,
   }
 
   // level: The compression level, in the range [0, 9] where 9 is the most compressed.
+  // We start from level 7 and decrease by [_step] until maxSize constrait is
+  // satisfied
   const _minLevel = 0;
-  const _maxLevel = 9;
+  const _maxLevel = 7;
   const _step = 1;
 
   ImageResolution? _resolution = maxResolution ?? ImageResolution.uhd;

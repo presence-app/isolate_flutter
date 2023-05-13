@@ -19,8 +19,10 @@ Future<Uint8List> compressJpegImage(Uint8List data,
   }
 
   // quality: The JPEG quality, in the range [0, 100] where 100 is highest quality.
+  // We start from 70% quality and decrease by [_step] until maxSize constrait is
+  // satisfied
   const _minQuality = 0;
-  const _maxQuality = 100;
+  const _maxQuality = 70;
   const _step = 10;
 
   ImageResolution? _resolution = maxResolution ?? ImageResolution.uhd;
