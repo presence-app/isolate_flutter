@@ -1,6 +1,6 @@
 name: isolate_image_compress
 description: IsolateImageCompress is a package to compress and resize the images in isolate (IsolateFlutter).
-version: 2.2.1
+version: 2.2.2
 homepage: https://github.com/thongdn-it/isolate_flutter/tree/master/isolate_image_compress
 repository: https://github.com/thongdn-it/isolate_flutter/tree/master/isolate_image_compress
 
