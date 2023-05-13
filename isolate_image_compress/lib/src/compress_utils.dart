@@ -98,6 +98,7 @@ extension CompressOnIsolateImage on IsolateImage {
   ///
   /// - [maxSize] - compressed file size limit (Bytes). (optional).
   /// - [maxResolution] - the maximum resolution compressed. (optional).
+  /// - [width] - width size fixed by mantaining aspectRatio  (optional).
   /// - [format] - the image format you want to compress. (optional).
   Future<Uint8List?> compress(
       {int? maxSize,
