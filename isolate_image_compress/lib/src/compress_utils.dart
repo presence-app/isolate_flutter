@@ -56,16 +56,16 @@ Future<Uint8List> _compressImage(CompressParams params) async {
             findDecoderForData(_fileData);
     if (_decoder is JpegDecoder) {
       return compressJpegImage(_fileData,
-          maxSize: _maxSize, maxResolution: _maxResolution);
+          maxSize: _maxSize, maxWidth: _maxWidth, maxResolution: _maxResolution);
     } else if (_decoder is PngDecoder) {
       return compressPngImage(_fileData,
-          maxSize: _maxSize, maxResolution: _maxResolution);
+          maxSize: _maxSize, maxWidth: _maxWidth, maxResolution: _maxResolution);
     } else if (_decoder is TgaDecoder) {
       return compressTgaImage(_fileData,
-          maxSize: _maxSize, maxResolution: _maxResolution);
+          maxSize: _maxSize, maxWidth: _maxWidth, maxResolution: _maxResolution);
     } else if (_decoder is GifDecoder) {
       return compressGifImage(_fileData,
-          maxSize: _maxSize, maxResolution: _maxResolution);
+          maxSize: _maxSize, maxWidth: _maxWidth, maxResolution: _maxResolution);
     }
 
     return Uint8List(0);
@@ -98,11 +98,13 @@ extension CompressOnIsolateImage on IsolateImage {
   Future<Uint8List?> compress(
       {int? maxSize,
       ImageResolution? maxResolution,
+      int? maxWidth,
       ImageFormat? format}) async {
     final CompressParams _params = CompressParams(
         image: this,
         maxSize: maxSize,
         maxResolution: maxResolution,
+        maxWidth: maxWidth,
         format: format);
     return IsolateFlutter.createAndStart(_compressImage, _params,
         debugLabel: 'isolate_image_compress');
@@ -116,10 +118,11 @@ extension CompressOnUint8List on Uint8List {
   /// - [maxResolution] - the maximum resolution compressed. (optional).
   /// - [format] - the image format you want to compress. (optional).
   Future<Uint8List?> compress(
-      {int? maxSize, ImageResolution? resolution, ImageFormat? format}) async {
+      {int? maxSize, ImageResolution? resolution, int? maxWidth, ImageFormat? format}) async {
     final CompressParams _params = CompressParams(
         imageData: this,
         maxSize: maxSize,
+        maxWidth: maxWidth,
         maxResolution: resolution,
         format: format);
     return IsolateFlutter.createAndStart(_compressImage, _params,
@@ -134,10 +137,11 @@ extension CompressOnListInt on List<int> {
   /// - [maxResolution] - the maximum resolution compressed. (optional).
   /// - [format] - the image format you want to compress. (optional).
   Future<Uint8List?> compress(
-      {int? maxSize, ImageResolution? resolution, ImageFormat? format}) async {
+      {int? maxSize, ImageResolution? resolution, int? maxWidth, ImageFormat? format}) async {
     final CompressParams _params = CompressParams(
         imageData: Uint8List.fromList(this),
         maxSize: maxSize,
+        maxWidth: maxWidth,
         maxResolution: resolution,
         format: format);
     return IsolateFlutter.createAndStart(_compressImage, _params,
