@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:flutter/cupertino.dart';
 import 'package:image/image.dart';
 import 'package:isolate_flutter/isolate_flutter.dart';
 
@@ -57,6 +58,8 @@ Future<Uint8List> _compressImage(CompressParams params) async {
   final Uint8List _fileData =
       params.imageData ?? params.image?.data ?? Uint8List(0);
   final fileSize = (_maxSize == null) ? _fileData.length : _maxSize;
+  debugPrint('Compress_utils: fileSize: $fileSize');
+  debugPrint('Compress_utils: _fileData.length: $_fileData.length');
   if (_fileData.isEmpty || _fileData.length <= fileSize) {
     // not compression
     return _fileData;
