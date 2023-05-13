@@ -17,7 +17,7 @@ extension ResizeOnImage on Image {
       }
     }
     if (_newWidth != null || _newHeight != null) {
-      if (_newWidth != _newHeight) {
+      if (_newWidth != _newHeight && resolution.width != resolution.height) {
         return copyResize(this, width: _newWidth, height: _newHeight);
       } else {
         // If width and height are the same, return a sqaurecrop
