@@ -102,7 +102,7 @@ extension CompressOnIsolateImage on IsolateImage {
   Future<Uint8List?> compress(
       {int? maxSize,
       ImageResolution? maxResolution,
-      int? with,
+      int? width,
       ImageFormat? format}) async {
     final CompressParams _params = CompressParams(
         image: this,
@@ -145,7 +145,7 @@ extension CompressOnListInt on List<int> {
     final CompressParams _params = CompressParams(
         imageData: Uint8List.fromList(this),
         maxSize: maxSize,
-        maxWidth: maxWidth,
+        width: width,
         maxResolution: resolution,
         format: format);
     return IsolateFlutter.createAndStart(_compressImage, _params,
