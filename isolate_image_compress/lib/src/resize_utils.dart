@@ -8,6 +8,7 @@ extension ResizeOnImage on img.Image {
   /// Resize image with resolution
   img.Image resizeWithResolution(ImageResolution resolution) {
     int? _newWidth, _newHeight;
+    debugPrint('Isolate Flutter Compress: width: $width, height: $height');
     if (width < height) {
       if (height > resolution.height) {
         _newHeight = resolution.height;
@@ -17,9 +18,9 @@ extension ResizeOnImage on img.Image {
         _newWidth = resolution.width;
       }
     }
+    debugPrint('Isolate Flutter Compress: _width: $_newWidth, _height: $_newHeight');
     if (_newWidth != null || _newHeight != null) {
       if (_newWidth != _newHeight && resolution.width != resolution.height) {
-        debugPrint('Isolate Flutter Compress: width: $_newWidth, height: $_newHeight');
         return img.copyResize(this, width: _newWidth, height: _newHeight);
       } else {
         // If width and height are the same, return a sqaurecrop
