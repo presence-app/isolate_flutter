@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 
-import 'package:flutter/cupertino.dart';
 import 'package:image/image.dart';
 import 'package:isolate_flutter/isolate_flutter.dart';
 
