@@ -27,7 +27,7 @@ class CompressParams {
   final ImageResolution? maxResolution;
 
   /// [format] - the image format you want to compress.
-  final ImageFormat? format;
+  final ImageFormatType? format;
 
   /// Parameters used for compression
   ///
@@ -84,15 +84,15 @@ Future<Uint8List> _compressImage(CompressParams params) async {
   }
 }
 
-Decoder? _getDecoder(ImageFormat format) {
+Decoder? _getDecoder(ImageFormatType format) {
   switch (format) {
-    case ImageFormat.jpeg:
+    case ImageFormatType.jpeg:
       return JpegDecoder();
-    case ImageFormat.png:
+    case ImageFormatType.png:
       return PngDecoder();
-    case ImageFormat.tga:
+    case ImageFormatType.tga:
       return TgaDecoder();
-    case ImageFormat.gif:
+    case ImageFormatType.gif:
       return GifDecoder();
     default:
       return null;
@@ -114,7 +114,7 @@ extension CompressOnIsolateImage on IsolateImage {
       int? quality,
       ImageResolution? maxResolution,
       int? width,
-      ImageFormat? format}) async {
+      ImageFormatType? format}) async {
     final CompressParams _params = CompressParams(
         image: this,
         maxSize: maxSize,
@@ -136,7 +136,7 @@ extension CompressOnUint8List on Uint8List {
   /// - [width] - image is resized to width if original width > width
   /// - [format] - the image format you want to compress. (optional).
   Future<Uint8List?> compress(
-      {int? maxSize, int? quality, ImageResolution? resolution, int? width, ImageFormat? format}) async {
+      {int? maxSize, int? quality, ImageResolution? resolution, int? width, ImageFormatType? format}) async {
     final CompressParams _params = CompressParams(
         imageData: this,
         maxSize: maxSize,
@@ -157,7 +157,7 @@ extension CompressOnListInt on List<int> {
   /// - [maxResolution] - the maximum resolution compressed. (optional).
   /// - [format] - the image format you want to compress. (optional).
   Future<Uint8List?> compress(
-      {int? maxSize, int? quality, ImageResolution? resolution, int? width, ImageFormat? format}) async {
+      {int? maxSize, int? quality, ImageResolution? resolution, int? width, ImageFormatType? format}) async {
     final CompressParams _params = CompressParams(
         imageData: Uint8List.fromList(this),
         maxSize: maxSize,

@@ -1,5 +1,5 @@
 enum ImageFromType { file, path }
-enum ImageFormat { png, jpeg, gif, tga }
+enum ImageFormatType { png, jpeg, gif, tga }
 
 class ImageResolution {
   final int width;
